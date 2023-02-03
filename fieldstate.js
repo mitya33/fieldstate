@@ -73,26 +73,24 @@ let fs = (function() {
 			if (field.getAttribute('data-fieldState')) {
 	
 				//selector to find element to take data from
-				let selector = field.getAttribute('data-fieldState').replace(/^as:/, ''), cache_item = as_cache[selector];
+				let selector = field.getAttribute('data-fieldState').replace(/^as:/, '');
 	
-				//have we taken data from this element before? Should be in the cache, if so. No...
-				if (!cache_item) {
-					as_cache[selector] = {};
-					let other_field = document.querySelector(selector);
-					if (other_field) {
-						field.getAttribute('data-req') = as_cache[selector].req = other_field.getAttribute('data-req');
-						field.getAttribute('data-avail') = as_cache[selector].avail = other_field.getAttribute('data-avail');
-						field.getAttribute('data-unreq-state') = as_cache[selector].unreqState = other_field.getAttribute('data-unreq-state');
-						field.getAttribute('data-unavail-state') = as_cache[selector].unavailState = other_field.getAttribute('data-unavail-state');
+				//copy across attrs and cache
+				as_cache[selector] = as_cache[selector] || {};
+				let other_field = document.querySelector(selector);
+				if (other_field) {
+					if (!Object.keys(as_cache[selector]).length) {
+						as_cache[selector].req = other_field.getAttribute('data-req')
+						as_cache[selector].avail = other_field.getAttribute('data-avail')
+						as_cache[selector].unreqState = other_field.getAttribute('data-unreq-state')
+						as_cache[selector].unavailState = other_field.getAttribute('data-unavail-state')
 					}
-	
-				//...yes...
-				} else {
-					field.getAttribute('data-req') = cache_item.req;
-					field.getAttribute('data-avail') = cache_item.avail;
-					field.getAttribute('data-unreq-state') = cache_item.unreqState;
-					field.getAttribute('data-unavail-state') = cache_item.unavailState;
+					field.setAttribute('data-req', as_cache[selector].req);
+					field.setAttribute('data-avail', as_cache[selector].avail);
+					field.setAttribute('data-unreq-state', as_cache[selector].unreqState);
+					field.setAttribute('data-unavail-state', as_cache[selector].unavailState);
 				}
+
 			}
 
 	
