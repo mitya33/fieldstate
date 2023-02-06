@@ -4,7 +4,7 @@
 | @documentation: http://mitya.uk/projects/field-state/
 ================= */
 
-let fs = (function() {
+window.fs = window.fs || (function() {
 
 	let done_radios_hack,
 
