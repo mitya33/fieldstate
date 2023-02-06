@@ -82,8 +82,8 @@ window.fs = window.fs || (function() {
 					if (!Object.keys(as_cache[selector]).length) {
 						as_cache[selector].req = other_field.getAttribute('data-req')
 						as_cache[selector].avail = other_field.getAttribute('data-avail')
-						as_cache[selector].unreqState = other_field.getAttribute('data-unreq-state')
-						as_cache[selector].unavailState = other_field.getAttribute('data-unavail-state')
+						as_cache[selector].unreqState = other_field.getAttribute('data-unreq-state') || default_states['unreq']
+						as_cache[selector].unavailState = other_field.getAttribute('data-unavail-state') || default_states['unavail']
 					}
 					field.setAttribute('data-req', as_cache[selector].req);
 					field.setAttribute('data-avail', as_cache[selector].avail);
