@@ -52,7 +52,7 @@ window.fs = window.fs || (function() {
 		//iterate over fields
 		
 		let checker_func;
-		[(fields.forEach ? fields : [fields]).forEach(checker_func = field => {
+		(fields.forEach ? fields : [fields]).forEach(checker_func = field => {
 
 			//ignore if field is not actually a field
 			//if (!/input|select|textarea/i.test(field.tagName)) return;
